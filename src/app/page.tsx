@@ -1,121 +1,97 @@
-
-'use client';
-
-import {Button} from '@/components/ui/button';
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card';
-import {useState} from 'react';
-import {InfernalInsightsOutput, infernalInsights} from '@/ai/flows/infernal-insights';
-import {Textarea} from '@/components/ui/textarea';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+// Import an icon for visual flair (replace with actual icons later)
+// import { Skull, BrainCircuit } from 'lucide-react'; // Example icons
+import { FireParticles } from "@/components/fire-particles"; // Assuming this exists
 
 export default function Home() {
-  const [query, setQuery] = useState('');
-  const [analysis, setAnalysis] = useState<InfernalInsightsOutput | null>(null);
-
-  const handleAnalysis = async () => {
-    const result = await infernalInsights({query: query});
-    setAnalysis(result);
-  };
-
   return (
-    <div className="relative flex flex-col items-center justify-start min-h-screen overflow-hidden">
-      {/* Animated Inferno Background */}
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-red-900 to-black opacity-40 animate-fade"></div>
+    <div className="relative flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden">
+       {/* Background Element: Use the FireParticles component */}
+       <FireParticles className="absolute inset-0 z-0" />
 
-      {/* Main Content */}
-      <main className="relative z-10 flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold animate-fire">
-          Welcome to the{' '}
-          <span className="text-red-600">Infernal</span>
-          <a className="text-red-500" href="https://example.com">
-            Decision Points!
-          </a>
-        </h1>
+      {/* Foreground Content */}
+      <div className="z-10 flex flex-col items-center text-center w-full max-w-4xl">
 
-        <p className="mt-3 text-2xl animate-fire">
-          Unleash the power of AI, forged in the depths of hell.
-        </p>
+        {/* Header */}
+        <header className="mb-12">
+           {/* Optional: Add an infernal logo/icon */}
+           {/* <Skull className="w-16 h-16 mx-auto mb-4 text-infernal-ember animate-pulse" /> */}
+          <h1 className="text-5xl md:text-7xl font-extrabold mb-4 text-infernal-ember animate-subtle-glow">
+            Decision Points
+          </h1>
+          <p className="text-lg md:text-xl text-infernal-smoke max-w-2xl mx-auto">
+            Witness the infernal machine autonomously forge passive income streams.
+            Observe, do not interfere.
+          </p>
+        </header>
 
-        {/* Infernal Insights Section */}
-        <div className="mt-8 w-full max-w-md">
-          <h2 className="text-3xl font-bold mb-4 animate-fire">Infernal Insights</h2>
-          <Textarea
-            placeholder="Enter your query for a demonic analysis..."
-            className="bg-black text-red-500 border-red-700"
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-          />
-          <Button className="mt-4 bg-red-700 hover:bg-red-500 text-white" onClick={handleAnalysis}>
-            Get Analysis
+        {/* Placeholder Dashboard Section */}
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+          {/* Card Example 1: Orchestrator Status */}
+          <Card className="border-infernal-ash shadow-lg bg-infernal-charcoal/80 backdrop-blur-sm hover:border-infernal-ember transition-colors duration-300">
+            <CardHeader>
+              {/* <BrainCircuit className="w-8 h-8 mb-2 text-infernal-soulfire" /> */}
+              <CardTitle className="text-infernal-flame text-2xl">Orchestrator</CardTitle>
+              <CardDescription className="text-infernal-smoke">Central Command AI</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-foreground mb-2">Status: <span className="text-green-500 font-semibold animate-pulse">Operational</span></p>
+              <p className="text-sm text-muted-foreground mb-1">Current Strategy: Balanced Growth</p>
+              <p className="text-sm text-muted-foreground">Active Agents: 5</p>
+            </CardContent>
+            <CardFooter>
+                <Progress value={75} className="w-full h-2 [&>div]:bg-infernal-ember" aria-label="Orchestrator Load" />
+            </CardFooter>
+          </Card>
+
+          {/* Card Example 2: Total Earnings */}
+           <Card className="border-infernal-ash shadow-lg bg-infernal-charcoal/80 backdrop-blur-sm hover:border-infernal-ember transition-colors duration-300">
+            <CardHeader>
+              {/* Icon placeholder */}
+              <CardTitle className="text-infernal-flame text-2xl">Accrued Value</CardTitle>
+              <CardDescription className="text-infernal-smoke">Total passive income generated</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-4xl font-bold text-infernal-gold">$0.00</p>
+               <p className="text-sm text-green-400 mt-1">+0% Today</p>
+            </CardContent>
+             <CardFooter className="flex justify-end">
+                <Button variant="ghost" size="sm" className="text-infernal-ember hover:bg-infernal-ash/50 hover:text-infernal-flame">View Details</Button>
+             </CardFooter>
+          </Card>
+
+           {/* Card Example 3: Recent Activity Log */}
+           <Card className="border-infernal-ash shadow-lg bg-infernal-charcoal/80 backdrop-blur-sm md:col-span-2 lg:col-span-1 hover:border-infernal-ember transition-colors duration-300">
+            <CardHeader>
+               {/* Icon placeholder */}
+              <CardTitle className="text-infernal-flame text-2xl">Activity Feed</CardTitle>
+              <CardDescription className="text-infernal-smoke">Latest autonomous actions</CardDescription>
+            </CardHeader>
+            <CardContent>
+               <ul className="space-y-2 text-sm">
+                    <li className="text-foreground">Agent <span className="text-infernal-soulfire">ContentGen-Alpha</span> deployed new article set.</li>
+                    <li className="text-muted-foreground">Orchestrator adjusted resource allocation for <span className="text-infernal-soulfire">AffiliateBot-Gamma</span>.</li>
+                    <li className="text-muted-foreground">Market Analysis Agent identified trend: [Placeholder Trend].</li>
+               </ul>
+            </CardContent>
+             <CardFooter className="flex justify-end">
+                 <Button variant="outline" size="sm" className="border-infernal-ash text-infernal-smoke hover:border-infernal-ember hover:text-infernal-flame hover:bg-infernal-ash/30">View Full Log</Button>
+             </CardFooter>
+          </Card>
+
+        </section>
+
+        {/* Call to Action / Auth Section (Placeholder) */}
+        <footer className="mt-16">
+          <Button size="lg" className="bg-infernal-ember hover:bg-infernal-flame text-primary-foreground font-bold text-lg shadow-lg hover:shadow-xl transition-all animate-subtle-pulse">
+            Authorize System Access
+            {/* <span className="ml-2 text-xl">🔥</span> */}
           </Button>
-
-          {analysis && (
-            <Card className="mt-4 bg-black border-red-700">
-              <CardHeader>
-                <CardTitle className="text-2xl animate-fire">Demonic Analysis</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-red-400">{analysis.analysis}</p>
-              </CardContent>
-            </Card>
-          )}
-        </div>
-
-        {/* Core Features Section */}
-        <div className="mt-12 flex flex-wrap items-center justify-around max-w-4xl sm:w-full">
-          <Card className="p-4 w-96 bg-black border-red-700">
-            <CardHeader>
-              <CardTitle className="animate-fire">Proactive Opportunity Analysis</CardTitle>
-              <CardDescription className="text-red-400">
-                Continuously scans markets, trends, and data sources to autonomously identify and evaluate new passive
-                income opportunities without user prompting.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-red-500">AI Powered Analysis</p>
-            </CardContent>
-          </Card>
-
-          <Card className="p-4 w-96 bg-black border-red-700">
-            <CardHeader>
-              <CardTitle className="animate-fire">Dynamic &amp; Adaptive Strategy</CardTitle>
-              <CardDescription className="text-red-400">
-                Formulates, deploys, and continuously adapts income strategies based on real-time performance data,
-                market shifts, and predictive analytics. Automatically selects niches, models (affiliate, digital
-                products, etc.), and platforms.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-red-500">AI Powered Strategy</p>
-            </CardContent>
-          </Card>
-
-          <Card className="p-4 w-96 bg-black border-red-700">
-            <CardHeader>
-              <CardTitle className="animate-fire">Autonomous Resource Allocation</CardTitle>
-              <CardDescription className="text-red-400">
-                Intelligently allocates system resources (e.g., API budgets, compute) across various Action Agents and
-                income streams based on projected ROI and performance.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-red-500">AI Powered Allocation</p>
-            </CardContent>
-          </Card>
-
-          <Card className="p-4 w-96 bg-black border-red-700">
-            <CardHeader>
-              <CardTitle className="animate-fire">Observational Dashboard</CardTitle>
-              <CardDescription className="text-red-400">
-                Provides real-time insights into the autonomous operations: View the Orchestrator's current strategy,
-                active income streams, resource allocation, and key decisions.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button className="bg-red-700 hover:bg-red-500 text-white">View Dashboard</Button>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
+          <p className="text-xs text-infernal-smoke mt-4">Initial authorization required via Stripe Connect.</p>
+        </footer>
+      </div>
     </div>
   );
 }
