@@ -1,22 +1,19 @@
 
 import type {Metadata} from 'next';
-import {Geist, Geist_Mono} from 'next/font/google';
+import {Creepster} from 'next/font/google';
 import './globals.css';
 import {Toaster} from '@/components/ui/toaster';
+import FireParticles from '@/components/fire-particles';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const creepster = Creepster({
+  weight: '400',
   subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'Decision Points',
-  description: 'Autonomous AI Ecosystem for Passive Income Generation',
+  title: 'Decision Points: Inferno Edition',
+  description: 'Autonomous AI Ecosystem for Passive Income Generation - Now with a Hellish Twist!',
 };
 
 export default function RootLayout({
@@ -25,10 +22,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
-        <Toaster />
+    <html lang="en" className={creepster.className}>
+      <body className="bg-black text-red-500">
+        <FireParticles />
+        <div className="relative z-10">
+          {children}
+          <Toaster />
+        </div>
       </body>
     </html>
   );
